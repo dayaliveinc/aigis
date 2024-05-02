@@ -5,35 +5,37 @@ var exec = process.exec;
 var bs = require("browser-sync");
 var reload = bs.reload;
 
-
 var src = {
   js: ["lib2/**/*.js"],
-  tests: ['./test/**/*.js', '!test/{temp,temp/**}']
+  tests: ["./test/**/*.js", "!test/{temp,temp/**}"],
 };
 
 var index = "./bin/aigis";
 
-gulp.task("exec:index", function(cb) {
-  exec("node " + index + " ./examples/aigis_config.yml", function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb();
-  });
+gulp.task("exec:index", function (cb) {
+  exec(
+    "node " + index + " ./examples/aigis_config.yml",
+    function (err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
+      cb();
+    }
+  );
 });
 
-gulp.task("watch",function() {
+gulp.task("watch", function () {
   return gulp.watch(src.js, ["exec:index"]);
 });
 
-gulp.task("serve", function() {
+gulp.task("serve", function () {
   bs.init({
     server: {
       baseDir: ["./examples"],
-      directory: true
+      directory: true,
     },
     notify: false,
-    host: "localhost"
+    host: "localhost",
   });
 });
 
-gulp.task("default", ["exec:index"]);
+gulp.task("default", gulp.task("exec:index"));
