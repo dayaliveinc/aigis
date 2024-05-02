@@ -1,6 +1,5 @@
 var gulp = require("gulp");
 var plumber = require("gulp-plumber");
-var mocha = require('gulp-mocha');
 var process = require("child_process");
 var exec = process.exec;
 var bs = require("browser-sync");
@@ -35,10 +34,6 @@ gulp.task("serve", function() {
     notify: false,
     host: "localhost"
   });
-});
-
-gulp.task('test', function() {
-  gulp.src('test/**/*.js', {read: false}).pipe(mocha({reporter: 'nyan'}));
 });
 
 gulp.task("default", ["exec:index"]);

@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+const version = require('../package').version;
+
 var argv = require('yargs')
   .demand(1, 'Usage: aigis run -c ./path/to/aigis_config.yml')
   .command('run', 'Generate styleguide', require('./cmd/run'))
@@ -6,7 +9,7 @@ var argv = require('yargs')
   .command('init', 'Copy template & theme & config file', require('./cmd/init'))
   .example('$0 init -e jade')
   .alias('v', 'version')
-  .version(function() { return require('../package').version; })
+  .version(version)
   .describe('v', 'show version information')
   .alias('h', 'help')
   .usage('Usage: aigis run -c ./path/to/aigis_config.yml')
